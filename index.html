@@ -8,341 +8,92 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #0e1117;
-      --surface: #161b27;
-      --surface2: #1e2535;
-      --border: rgba(255,255,255,0.07);
-      --border2: rgba(255,255,255,0.13);
-      --text: #e8eaf0;
-      --muted: #7a8499;
-      --hint: #4a5268;
-      --green: #4ade80;
-      --green-bg: rgba(74,222,128,0.1);
-      --green-dark: #16a34a;
-      --red: #f87171;
-      --red-bg: rgba(248,113,113,0.1);
-      --amber: #fbbf24;
-      --amber-bg: rgba(251,191,36,0.1);
-      --blue: #60a5fa;
-      --blue-bg: rgba(96,165,250,0.08);
-      --accent: #4ade80;
-      --radius: 10px;
-      --radius-sm: 6px;
+      --bg:#0e1117;--surface:#161b27;--surface2:#1e2535;
+      --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+      --text:#e8eaf0;--muted:#7a8499;--hint:#4a5268;
+      --green:#4ade80;--green-bg:rgba(74,222,128,0.1);
+      --red:#f87171;--red-bg:rgba(248,113,113,0.1);
+      --amber:#fbbf24;--amber-bg:rgba(251,191,36,0.1);
+      --blue:#60a5fa;--blue-bg:rgba(96,165,250,0.08);
+      --radius:10px;--radius-sm:6px;
     }
-
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 15px;
-      line-height: 1.6;
-      min-height: 100vh;
-      padding: 0;
-    }
-
-    /* Grid de fondo */
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(74,222,128,0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(74,222,128,0.03) 1px, transparent 1px);
-      background-size: 40px 40px;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .page {
-      position: relative;
-      z-index: 1;
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 2.5rem 1.25rem 4rem;
-    }
-
-    /* Header */
-    header {
-      margin-bottom: 2.5rem;
-    }
-    .header-tag {
-      font-family: 'DM Mono', monospace;
-      font-size: 11px;
-      color: var(--accent);
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      margin-bottom: .5rem;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .header-tag::before {
-      content: '';
-      display: inline-block;
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 8px var(--accent);
-    }
-    h1 {
-      font-size: clamp(1.6rem, 4vw, 2.2rem);
-      font-weight: 300;
-      letter-spacing: -.02em;
-      color: var(--text);
-      line-height: 1.2;
-    }
-    h1 span { color: var(--accent); font-weight: 500; }
-    .subtitle {
-      margin-top: .5rem;
-      font-size: 14px;
-      color: var(--muted);
-    }
-
-    /* Cards */
-    .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    .card-title {
-      font-family: 'DM Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--hint);
-      margin-bottom: 1.25rem;
-    }
-
-    /* Grid forms */
-    .g2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    .g3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: .75rem; }
-    @media (max-width: 500px) {
-      .g2 { grid-template-columns: 1fr; }
-      .g3 { grid-template-columns: 1fr 1fr; }
-    }
-
-    .field { display: flex; flex-direction: column; gap: 6px; }
-    .field label {
-      font-size: 12px;
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-      letter-spacing: .04em;
-    }
-    input[type="number"],
-    input[type="date"],
-    input[type="time"],
-    select {
-      background: var(--surface2);
-      border: 1px solid var(--border2);
-      border-radius: var(--radius-sm);
-      color: var(--text);
-      font-family: 'DM Mono', monospace;
-      font-size: 14px;
-      padding: .55rem .8rem;
-      outline: none;
-      transition: border-color .2s;
-      width: 100%;
-      appearance: none;
-    }
-    input:focus, select:focus { border-color: var(--accent); }
-    input[type="date"]::-webkit-calendar-picker-indicator,
-    input[type="time"]::-webkit-calendar-picker-indicator {
-      filter: invert(.4);
-    }
-
-    .info-bar {
-      margin-top: 1rem;
-      padding: .6rem .9rem;
-      background: var(--blue-bg);
-      border: 1px solid rgba(96,165,250,.15);
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      color: var(--blue);
-      font-family: 'DM Mono', monospace;
-    }
-
-    /* Button */
-    .btn-wrap { margin: 1.25rem 0; }
-    button.run {
-      width: 100%;
-      background: var(--accent);
-      color: #0a0f0a;
-      border: none;
-      border-radius: var(--radius-sm);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      padding: .8rem 1.5rem;
-      cursor: pointer;
-      letter-spacing: .02em;
-      transition: opacity .15s, transform .1s;
-    }
-    button.run:hover { opacity: .88; }
-    button.run:active { transform: scale(.99); }
-    button.run:disabled { opacity: .35; cursor: not-allowed; }
-
-    /* Loading */
-    #ld {
-      display: none;
-      text-align: center;
-      padding: 2rem;
-      color: var(--muted);
-      font-family: 'DM Mono', monospace;
-      font-size: 13px;
-    }
-    .spin {
-      display: inline-block;
-      width: 14px; height: 14px;
-      border: 2px solid var(--hint);
-      border-top-color: var(--accent);
-      border-radius: 50%;
-      animation: spin .7s linear infinite;
-      vertical-align: middle;
-      margin-right: 8px;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    /* Error */
-    .err-box {
-      display: none;
-      background: var(--red-bg);
-      border: 1px solid rgba(248,113,113,.2);
-      border-radius: var(--radius-sm);
-      padding: .8rem 1rem;
-      font-size: 13px;
-      color: var(--red);
-      margin-bottom: 1rem;
-      font-family: 'DM Mono', monospace;
-      white-space: pre-line;
-    }
-
-    /* Stat cards */
-    .stat {
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      padding: .9rem 1rem;
-    }
-    .stat-l { font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: .08em; color: var(--hint); text-transform: uppercase; margin-bottom: 6px; }
-    .stat-v { font-size: 1.6rem; font-weight: 500; font-family: 'DM Mono', monospace; color: var(--text); line-height: 1.1; }
-    .stat-s { font-size: 11px; color: var(--muted); margin-top: 3px; }
-
-    /* Timeline */
-    .tl-wrap { margin: 1rem 0 .6rem; }
-    .tl {
-      display: flex;
-      height: 22px;
-      border-radius: var(--radius-sm);
-      overflow: hidden;
-      gap: 2px;
-    }
-    .tl-seg { flex: 1; border-radius: 2px; transition: opacity .2s; cursor: default; }
-    .tl-seg:hover { opacity: .75; }
-    .legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: .5rem; }
-    .li { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); font-family: 'DM Mono', monospace; }
-    .dot { width: 10px; height: 10px; border-radius: 2px; flex-shrink: 0; }
-
-    /* Slot list */
-    .day-label {
-      font-size: 10px;
-      font-family: 'DM Mono', monospace;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--hint);
-      margin: 1rem 0 .4rem;
-      padding-bottom: .4rem;
-      border-bottom: 1px solid var(--border);
-    }
-    .slot {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 0;
-      border-bottom: 1px solid rgba(255,255,255,.04);
-      font-size: 13px;
-    }
-    .slot:last-child { border-bottom: none; }
-    .slot-t { font-family: 'DM Mono', monospace; min-width: 110px; color: var(--text); }
-    .bar-wrap { flex: 1; height: 4px; background: var(--surface2); border-radius: 99px; overflow: hidden; }
-    .bar-fill { height: 100%; border-radius: 99px; }
-    .slot-p { min-width: 80px; text-align: right; font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
-    .slot-s { min-width: 80px; text-align: right; }
-
-    .badge {
-      font-size: 10px;
-      font-family: 'DM Mono', monospace;
-      letter-spacing: .04em;
-      padding: 2px 8px;
-      border-radius: 99px;
-      font-weight: 500;
-    }
-    .b-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(74,222,128,.2); }
-    .b-red   { background: var(--red-bg);   color: var(--red);   border: 1px solid rgba(248,113,113,.2); }
-
-    /* Warning */
-    .warn-box {
-      margin-top: 1rem;
-      padding: .8rem 1rem;
-      background: var(--amber-bg);
-      border: 1px solid rgba(251,191,36,.2);
-      border-radius: var(--radius-sm);
-      font-size: 13px;
-      color: var(--amber);
-      font-family: 'DM Mono', monospace;
-      line-height: 1.6;
-    }
-
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      font-size: 12px;
-      color: var(--hint);
-      font-family: 'DM Mono', monospace;
-    }
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--accent); }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+      background-image:linear-gradient(rgba(74,222,128,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(74,222,128,0.025) 1px,transparent 1px);
+      background-size:40px 40px}
+    .page{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:2.5rem 1.25rem 4rem}
+    header{margin-bottom:2.5rem}
+    .tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--green);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;display:flex;align-items:center;gap:8px}
+    .tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);display:inline-block}
+    h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:300;letter-spacing:-.02em;line-height:1.2}
+    h1 span{color:var(--green);font-weight:500}
+    .sub{margin-top:.5rem;font-size:14px;color:var(--muted)}
+    .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:1.5rem;margin-bottom:1rem}
+    .card-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--hint);margin-bottom:1.25rem}
+    .g2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+    @media(max-width:500px){.g2{grid-template-columns:1fr}.g3{grid-template-columns:1fr 1fr}}
+    .field{display:flex;flex-direction:column;gap:6px}
+    .field label{font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:.04em}
+    input,select{background:var(--surface2);border:1px solid var(--border2);border-radius:var(--radius-sm);color:var(--text);font-family:'DM Mono',monospace;font-size:14px;padding:.55rem .8rem;outline:none;transition:border-color .2s;width:100%;appearance:none}
+    input:focus,select:focus{border-color:var(--green)}
+    input[type="date"]::-webkit-calendar-picker-indicator,input[type="time"]::-webkit-calendar-picker-indicator{filter:invert(.4)}
+    .info-bar{margin-top:1rem;padding:.6rem .9rem;background:var(--blue-bg);border:1px solid rgba(96,165,250,.15);border-radius:var(--radius-sm);font-size:13px;color:var(--blue);font-family:'DM Mono',monospace}
+    button.run{width:100%;background:var(--green);color:#0a0f0a;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:.8rem 1.5rem;cursor:pointer;letter-spacing:.02em;transition:opacity .15s,transform .1s;margin:1.25rem 0}
+    button.run:hover{opacity:.88}button.run:active{transform:scale(.99)}button.run:disabled{opacity:.35;cursor:not-allowed}
+    #ld{display:none;text-align:center;padding:2rem;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px}
+    .spin{display:inline-block;width:14px;height:14px;border:2px solid var(--hint);border-top-color:var(--green);border-radius:50%;animation:sp .7s linear infinite;vertical-align:middle;margin-right:8px}
+    @keyframes sp{to{transform:rotate(360deg)}}
+    .err{display:none;background:var(--red-bg);border:1px solid rgba(248,113,113,.2);border-radius:var(--radius-sm);padding:.8rem 1rem;font-size:13px;color:var(--red);margin-bottom:1rem;font-family:'DM Mono',monospace;white-space:pre-line;line-height:1.6}
+    .stat{background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);padding:.9rem 1rem}
+    .stat-l{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.08em;color:var(--hint);text-transform:uppercase;margin-bottom:6px}
+    .stat-v{font-size:1.6rem;font-weight:500;font-family:'DM Mono',monospace;color:var(--text);line-height:1.1}
+    .stat-s{font-size:11px;color:var(--muted);margin-top:3px}
+    .tl{display:flex;height:22px;border-radius:var(--radius-sm);overflow:hidden;gap:2px;margin:.75rem 0 .5rem}
+    .tl-seg{flex:1;border-radius:2px;cursor:default;transition:opacity .2s}
+    .tl-seg:hover{opacity:.7}
+    .legend{display:flex;gap:1rem;flex-wrap:wrap}
+    .li{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--muted);font-family:'DM Mono',monospace}
+    .dot{width:10px;height:10px;border-radius:2px;flex-shrink:0}
+    .day-label{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--hint);margin:1rem 0 .4rem;padding-bottom:.4rem;border-bottom:1px solid var(--border)}
+    .slot{display:flex;align-items:center;gap:8px;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:13px}
+    .slot:last-child{border-bottom:none}
+    .slot-t{font-family:'DM Mono',monospace;min-width:110px;color:var(--text)}
+    .bw{flex:1;height:4px;background:var(--surface2);border-radius:99px;overflow:hidden}
+    .bf{height:100%;border-radius:99px}
+    .slot-p{min-width:80px;text-align:right;font-family:'DM Mono',monospace;font-size:12px;color:var(--muted)}
+    .slot-s{min-width:80px;text-align:right}
+    .badge{font-size:10px;font-family:'DM Mono',monospace;letter-spacing:.04em;padding:2px 8px;border-radius:99px;font-weight:500}
+    .bg{background:var(--green-bg);color:var(--green);border:1px solid rgba(74,222,128,.2)}
+    .br{background:var(--red-bg);color:var(--red);border:1px solid rgba(248,113,113,.2)}
+    .warn{background:var(--amber-bg);border:1px solid rgba(251,191,36,.2);border-radius:var(--radius-sm);padding:.8rem 1rem;font-size:13px;color:var(--amber);font-family:'DM Mono',monospace;line-height:1.6;margin-top:1rem}
+    footer{margin-top:3rem;text-align:center;font-size:12px;color:var(--hint);font-family:'DM Mono',monospace;line-height:2}
+    footer a{color:var(--muted);text-decoration:none}
+    footer a:hover{color:var(--green)}
   </style>
 </head>
 <body>
 <div class="page">
-
   <header>
-    <div class="header-tag">EV Smart Charging</div>
+    <div class="tag">EV Smart Charging</div>
     <h1>Optimizador de carga<br><span>PVPC</span> inteligente</h1>
-    <p class="subtitle">Calcula las horas más baratas para cargar tu vehículo eléctrico · Datos oficiales Red Eléctrica de España</p>
+    <p class="sub">Calcula las horas más baratas para cargar tu vehículo · Datos PVPC oficiales España</p>
   </header>
 
-  <!-- Parámetros -->
   <div class="card">
     <div class="card-title">// Parámetros de carga</div>
     <div class="g2" style="margin-bottom:1rem">
-      <div class="field">
-        <label>Batería inicial (%)</label>
-        <input type="number" id="s" min="0" max="99" value="20" oninput="upd()">
-      </div>
-      <div class="field">
-        <label>Batería objetivo (%)</label>
-        <input type="number" id="e" min="1" max="100" value="80" oninput="upd()">
-      </div>
+      <div class="field"><label>Batería inicial (%)</label><input type="number" id="s" min="0" max="99" value="20" oninput="upd()"></div>
+      <div class="field"><label>Batería objetivo (%)</label><input type="number" id="e" min="1" max="100" value="80" oninput="upd()"></div>
     </div>
     <div class="g2">
-      <div class="field">
-        <label>Listo para el día</label>
-        <input type="date" id="dd" oninput="upd()">
-      </div>
-      <div class="field">
-        <label>A las (hora límite)</label>
-        <input type="time" id="dt" value="08:00" oninput="upd()">
-      </div>
+      <div class="field"><label>Listo para el día</label><input type="date" id="dd" oninput="upd()"></div>
+      <div class="field"><label>A las (hora límite)</label><input type="time" id="dt" value="08:00" oninput="upd()"></div>
     </div>
     <div class="info-bar" id="inf">Introduce los parámetros para ver el resumen</div>
   </div>
 
-  <!-- Zona -->
   <div class="card">
     <div class="card-title">// Zona tarifaria</div>
     <div class="field">
@@ -354,286 +105,223 @@
     </div>
   </div>
 
-  <div class="btn-wrap">
-    <button class="run" id="btn" onclick="run()">→ Calcular horario óptimo</button>
-  </div>
+  <button class="run" id="btn" onclick="run()">→ Calcular horario óptimo</button>
 
   <div id="ld"><span class="spin"></span><span id="ldt">Cargando precios…</span></div>
-  <div class="err-box" id="er"></div>
+  <div class="err" id="er"></div>
 
-  <!-- Resultados -->
   <div id="res" style="display:none">
-
     <div class="g3" style="margin-bottom:1rem">
-      <div class="stat">
-        <div class="stat-l">Horas de carga</div>
-        <div class="stat-v" id="rh">—</div>
-        <div class="stat-s">necesarias</div>
-      </div>
-      <div class="stat">
-        <div class="stat-l">Coste estimado</div>
-        <div class="stat-v" id="rc">—</div>
-        <div class="stat-s" id="rk">kWh</div>
-      </div>
-      <div class="stat">
-        <div class="stat-l">Ahorro vs peor</div>
-        <div class="stat-v" id="ra">—</div>
-        <div class="stat-s">frente a horas más caras</div>
-      </div>
+      <div class="stat"><div class="stat-l">Horas de carga</div><div class="stat-v" id="rh">—</div><div class="stat-s">necesarias</div></div>
+      <div class="stat"><div class="stat-l">Coste estimado</div><div class="stat-v" id="rc">—</div><div class="stat-s" id="rk">kWh</div></div>
+      <div class="stat"><div class="stat-l">Ahorro vs peor</div><div class="stat-v" id="ra">—</div><div class="stat-s">frente a horas más caras</div></div>
     </div>
-
     <div class="card">
       <div class="card-title">// Visión general de la sesión</div>
-      <div class="tl-wrap">
-        <div class="tl" id="tl"></div>
-      </div>
+      <div class="tl" id="tl"></div>
       <div class="legend">
         <div class="li"><div class="dot" style="background:#4ade80"></div>Cargando</div>
         <div class="li"><div class="dot" style="background:#f87171"></div>Pausa (precio alto)</div>
       </div>
     </div>
-
     <div class="card">
       <div class="card-title">// Detalle hora a hora</div>
       <div id="sl"></div>
     </div>
-
-    <div class="warn-box" id="w90" style="display:none">
-      ⚠ <span id="w90t"></span>
-    </div>
-
+    <div class="warn" id="w90" style="display:none">⚠ <span id="w90t"></span></div>
   </div>
 
   <footer>
-    <p>Datos: <a href="https://www.ree.es" target="_blank">Red Eléctrica de España</a> · Tarifa PVPC 2.0TD · Velocidad de carga: 6 %/h</p>
-    <p style="margin-top:.3rem">Los precios del día siguiente se publican a las ~20:30h</p>
+    <div>Fuente: <a href="https://api.preciodelaluz.org" target="_blank">api.preciodelaluz.org</a> · Tarifa PVPC 2.0TD · 6%/h · 7,4 kW</div>
+    <div>Los precios del día siguiente se publican a las ~20:30h</div>
   </footer>
-
 </div>
 
 <script>
-const CR = 6;     // % de batería cargado por hora
-const KW = 7.4;   // kW del cargador
+const CR = 6, KW = 7.4;
 
-function ds(d) { return d.toISOString().split('T')[0]; }
-function addD(s, n) { const d = new Date(s + 'T12:00:00'); d.setDate(d.getDate() + n); return ds(d); }
-function fmt(d) { return d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' }); }
-function fmtD(d) { return d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }); }
+// Proxies CORS públicos encadenados — se prueba uno a uno hasta que funcione
+const PROXIES = [
+  u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
+  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+  u => `https://thingproxy.freeboard.io/fetch/${u}`,
+];
 
-// Inicializar fecha por defecto = mañana
-(function init() {
-  document.getElementById('dd').value = addD(ds(new Date()), 1);
+function ds(d){return d.toISOString().split('T')[0]}
+function addD(s,n){const d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return ds(d)}
+function fmt(d){return d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'})}
+function fmtD(d){return d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
+function showErr(m){const el=document.getElementById('er');el.textContent=m;el.style.display='block';loading(false);document.getElementById('btn').disabled=false}
+function loading(on,msg){document.getElementById('ld').style.display=on?'block':'none';if(msg)document.getElementById('ldt').textContent=msg}
+
+(function init(){
+  document.getElementById('dd').value=addD(ds(new Date()),1);
   upd();
 })();
 
-function upd() {
-  const s = parseInt(document.getElementById('s').value) || 0;
-  const e = parseInt(document.getElementById('e').value) || 0;
-  const n = Math.max(0, e - s);
-  const h = Math.ceil(n / CR);
-  document.getElementById('inf').textContent = n > 0
-    ? `Necesitas cargar ${n}% → ${h}h de carga → aprox. ${(n / CR * KW).toFixed(1)} kWh`
-    : 'El objetivo debe ser mayor que la batería inicial.';
+function upd(){
+  const s=parseInt(document.getElementById('s').value)||0;
+  const e=parseInt(document.getElementById('e').value)||0;
+  const n=Math.max(0,e-s),h=Math.ceil(n/CR);
+  document.getElementById('inf').textContent=n>0
+    ?`Necesitas cargar ${n}% → ${h}h de carga → aprox. ${(n/CR*KW).toFixed(1)} kWh`
+    :'El objetivo debe ser mayor que la batería inicial.';
 }
 
-function showErr(m) {
-  const el = document.getElementById('er');
-  el.textContent = m;
-  el.style.display = 'block';
-  loading(false);
-  document.getElementById('btn').disabled = false;
+async function fetchWithProxy(url){
+  const errors=[];
+  for(const proxy of PROXIES){
+    try{
+      const r=await fetch(proxy(url),{signal:AbortSignal.timeout(9000)});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const text=await r.text();
+      // allorigins a veces envuelve en {contents: "..."}
+      try{
+        const j=JSON.parse(text);
+        if(j.contents) return JSON.parse(j.contents);
+        return j;
+      }catch(e){ throw new Error('JSON inválido: '+text.substring(0,80)); }
+    }catch(e){ errors.push(e.message); }
+  }
+  throw new Error('Todos los proxies fallaron.\n'+errors.join('\n'));
 }
 
-function loading(on, msg) {
-  document.getElementById('ld').style.display = on ? 'block' : 'none';
-  if (msg) document.getElementById('ldt').textContent = msg;
+async function fetchPVPC(dateStr,zone){
+  const url=`https://api.preciodelaluz.org/v1/prices/all?zone=${zone}&date=${dateStr}`;
+  const data=await fetchWithProxy(url);
+  // La API devuelve objeto con claves tipo "00-01", cada valor tiene: date, price, is-cheap
+  return Object.values(data).map(h=>{
+    const hour=new Date(h.date);
+    // price viene en €/MWh → convertir a €/kWh
+    const price=parseFloat(h.price)/1000;
+    return{hour,price};
+  }).filter(v=>!isNaN(v.price)&&!isNaN(v.hour.getTime())&&v.price>0);
 }
 
-// Intenta obtener precios de REE apidatos (no requiere auth, CORS abierto)
-async function fetchREE(dateStr) {
-  const start = dateStr + 'T00:00';
-  const end   = dateStr + 'T23:59';
-  const url   = `https://apidatos.ree.es/es/datos/mercados/precios-mercados-tiempo-real?start_date=${start}&end_date=${end}&time_trunc=hour`;
-  const r = await fetch(url, { headers: { Accept: 'application/json' } });
-  if (!r.ok) throw new Error('REE respondió HTTP ' + r.status);
-  const data = await r.json();
+async function run(){
+  const batS=parseInt(document.getElementById('s').value);
+  const batE=parseInt(document.getElementById('e').value);
+  const dateStr=document.getElementById('dd').value;
+  const timeStr=document.getElementById('dt').value;
+  const zone=document.getElementById('zone').value;
 
-  // La API de REE devuelve data.included[] con varios indicadores
-  const included = data.included || [];
+  document.getElementById('er').style.display='none';
+  document.getElementById('res').style.display='none';
+  document.getElementById('btn').disabled=true;
 
-  // Buscamos el indicador PVPC (puede llamarse "PVPC" o contener "pvpc" en el título)
-  let pvpc = included.find(i =>
-    i.type === 'PVPC' ||
-    (i.id && String(i.id) === '1001') ||
-    (i.attributes && i.attributes.title && i.attributes.title.toLowerCase().includes('pvpc'))
-  );
+  if(!dateStr||!timeStr){showErr('Selecciona fecha y hora límite.');return}
+  if(batE<=batS){showErr('El objetivo debe ser mayor que la batería inicial.');return}
 
-  // Si no encontramos PVPC específico, usamos el primer indicador disponible
-  if (!pvpc && included.length > 0) pvpc = included[0];
-  if (!pvpc) throw new Error('No se encontró indicador de precio en la respuesta de REE.');
+  const needed=batE-batS;
+  const horasNec=Math.ceil(needed/CR);
+  const deadline=new Date(dateStr+'T'+timeStr+':00');
+  const now=new Date();
+  if(deadline<=now){showErr('La fecha límite debe ser en el futuro.');return}
 
-  const values = pvpc.attributes.values || [];
-  return values.map(v => ({
-    hour:  new Date(v.datetime || v.date),
-    // REE devuelve el precio en €/MWh, convertimos a €/kWh
-    price: parseFloat(v.value) / 1000
-  })).filter(v => !isNaN(v.price) && !isNaN(v.hour.getTime()));
-}
+  loading(true,'Conectando con API de precios PVPC…');
 
-async function run() {
-  const batS    = parseInt(document.getElementById('s').value);
-  const batE    = parseInt(document.getElementById('e').value);
-  const dateStr = document.getElementById('dd').value;
-  const timeStr = document.getElementById('dt').value;
+  try{
+    const dates=new Set();
+    const c=new Date(now);
+    while(c<deadline){dates.add(ds(c));c.setDate(c.getDate()+1)}
 
-  document.getElementById('er').style.display = 'none';
-  document.getElementById('res').style.display = 'none';
-  document.getElementById('btn').disabled = true;
-
-  if (!dateStr || !timeStr) { showErr('Selecciona fecha y hora límite.'); return; }
-  if (batE <= batS)          { showErr('El objetivo debe ser mayor que la batería inicial.'); return; }
-
-  const needed   = batE - batS;
-  const horasNec = Math.ceil(needed / CR);
-  const deadline = new Date(dateStr + 'T' + timeStr + ':00');
-  const now      = new Date();
-
-  if (deadline <= now) { showErr('La fecha límite debe ser en el futuro.'); return; }
-
-  loading(true, 'Conectando con Red Eléctrica de España…');
-
-  try {
-    // Construimos el conjunto de fechas a consultar
-    const dates = new Set();
-    const c = new Date(now);
-    while (c < deadline) { dates.add(ds(c)); c.setDate(c.getDate() + 1); }
-
-    let allSlots = [];
-    let idx = 0;
-    for (const d of dates) {
+    let allSlots=[];
+    let idx=0;
+    for(const d of dates){
       idx++;
-      loading(true, `Obteniendo precios del ${d} (${idx}/${dates.size})…`);
-      try {
-        const slots = await fetchREE(d);
-        allSlots = allSlots.concat(slots);
-      } catch (e) {
-        console.warn('No se pudo obtener precios para', d, ':', e.message);
-      }
+      loading(true,`Obteniendo precios del ${d} (${idx}/${dates.size})…`);
+      try{
+        const slots=await fetchPVPC(d,zone);
+        allSlots=allSlots.concat(slots);
+      }catch(e){console.warn('Error para',d,':',e.message)}
     }
 
-    // Filtrar dentro de la ventana [ahora, deadline)
-    allSlots = allSlots
-      .filter(s => s.hour >= now && s.hour < deadline)
-      .sort((a, b) => a.hour - b.hour);
+    allSlots=allSlots.filter(s=>s.hour>=now&&s.hour<deadline).sort((a,b)=>a.hour-b.hour);
 
-    if (allSlots.length === 0) {
+    if(allSlots.length===0){
       showErr(
-        'No hay precios disponibles para este periodo.\n\n' +
-        '• La API de REE publica los precios del día siguiente a las ~20:30h.\n' +
-        '• Prueba con fecha de hoy o mañana (si ya son más de las 20:30h).\n' +
-        '• Si el problema persiste, puede ser una limitación temporal de la API.'
+        'No se obtuvieron precios para este periodo.\n\n'+
+        'Causas posibles:\n'+
+        '• Los precios del día siguiente se publican a las ~20:30h\n'+
+        '• Prueba con la fecha de hoy\n'+
+        '• La API puede estar temporalmente caída\n\n'+
+        'Abre la consola del navegador (F12 → Consola) para ver el error exacto.'
       );
       return;
     }
-
-    if (allSlots.length < horasNec) {
-      showErr(`Solo hay ${allSlots.length}h disponibles en la ventana pero necesitas ${horasNec}h. Amplía el plazo de tiempo.`);
+    if(allSlots.length<horasNec){
+      showErr(`Solo hay ${allSlots.length}h disponibles en la ventana, pero necesitas ${horasNec}h. Amplía el plazo.`);
       return;
     }
 
-    // Algoritmo greedy: elegir las N horas más baratas
-    const sorted   = [...allSlots].sort((a, b) => a.price - b.price);
-    const cheapSet = new Set(sorted.slice(0, horasNec).map(s => s.hour.getTime()));
-    const plan     = allSlots.map(s => ({ ...s, charging: cheapSet.has(s.hour.getTime()) }));
+    const sorted=[...allSlots].sort((a,b)=>a.price-b.price);
+    const cheapSet=new Set(sorted.slice(0,horasNec).map(s=>s.hour.getTime()));
+    const plan=allSlots.map(s=>({...s,charging:cheapSet.has(s.hour.getTime())}));
 
-    const prices   = allSlots.map(s => s.price);
-    const minP     = Math.min(...prices);
-    const maxP     = Math.max(...prices);
-    const range    = maxP - minP || 1;
-    const totalCost = plan.filter(s => s.charging).reduce((a, s) => a + s.price * KW, 0);
-    const worstCost = sorted.slice(-horasNec).reduce((a, s) => a + s.price * KW, 0);
+    const prices=allSlots.map(s=>s.price);
+    const minP=Math.min(...prices),maxP=Math.max(...prices),range=maxP-minP||1;
+    const totalCost=plan.filter(s=>s.charging).reduce((a,s)=>a+s.price*KW,0);
+    const worstCost=sorted.slice(-horasNec).reduce((a,s)=>a+s.price*KW,0);
 
-    // Rellenar stats
-    document.getElementById('rh').textContent = horasNec + 'h';
-    document.getElementById('rc').textContent = '€' + totalCost.toFixed(3);
-    document.getElementById('rk').textContent = (needed / CR * KW).toFixed(1) + ' kWh aprox.';
-    document.getElementById('ra').textContent = '€' + Math.max(0, worstCost - totalCost).toFixed(3);
+    document.getElementById('rh').textContent=horasNec+'h';
+    document.getElementById('rc').textContent='€'+totalCost.toFixed(3);
+    document.getElementById('rk').textContent=(needed/CR*KW).toFixed(1)+' kWh aprox.';
+    document.getElementById('ra').textContent='€'+Math.max(0,worstCost-totalCost).toFixed(3);
 
-    // Timeline
-    const tl = document.getElementById('tl');
-    tl.innerHTML = '';
-    plan.forEach(s => {
-      const seg = document.createElement('div');
-      seg.className = 'tl-seg';
-      seg.style.background = s.charging ? '#4ade80' : '#f87171';
-      seg.title = fmt(s.hour) + ' · ' + (s.charging ? '⚡ Cargar' : '⏸ Pausa') + ' · ' + (s.price * 1000).toFixed(2) + ' €/MWh';
+    const tl=document.getElementById('tl');
+    tl.innerHTML='';
+    plan.forEach(s=>{
+      const seg=document.createElement('div');
+      seg.className='tl-seg';
+      seg.style.background=s.charging?'#4ade80':'#f87171';
+      seg.title=fmt(s.hour)+' · '+(s.charging?'⚡ Cargar':'⏸ Pausa')+' · '+(s.price*1000).toFixed(2)+' €/MWh';
       tl.appendChild(seg);
     });
 
-    // Lista de slots
-    const sl = document.getElementById('sl');
-    sl.innerHTML = '';
-    let lastDay = '';
-    plan.forEach(s => {
-      const day = fmtD(s.hour);
-      if (day !== lastDay) {
-        lastDay = day;
-        const dl = document.createElement('div');
-        dl.className = 'day-label';
-        dl.textContent = day;
+    const sl=document.getElementById('sl');
+    sl.innerHTML='';
+    let lastDay='';
+    plan.forEach(s=>{
+      const day=fmtD(s.hour);
+      if(day!==lastDay){
+        lastDay=day;
+        const dl=document.createElement('div');
+        dl.className='day-label';
+        dl.textContent=day;
         sl.appendChild(dl);
       }
-      const pct      = Math.round((s.price - minP) / range * 100);
-      const barColor = pct < 33 ? '#4ade80' : pct < 66 ? '#fbbf24' : '#f87171';
-      const endH     = new Date(s.hour.getTime() + 3600000);
-      const row      = document.createElement('div');
-      row.className  = 'slot';
-      row.innerHTML  = `
+      const pct=Math.round((s.price-minP)/range*100);
+      const bc=pct<33?'#4ade80':pct<66?'#fbbf24':'#f87171';
+      const endH=new Date(s.hour.getTime()+3600000);
+      const row=document.createElement('div');
+      row.className='slot';
+      row.innerHTML=`
         <span class="slot-t">${fmt(s.hour)}–${fmt(endH)}</span>
-        <div class="bar-wrap"><div class="bar-fill" style="width:${Math.max(pct, 3)}%;background:${barColor}"></div></div>
-        <span class="slot-p">${(s.price * 1000).toFixed(2)} €/MWh</span>
-        <span class="slot-s">${s.charging
-          ? '<span class="badge b-green">⚡ CARGAR</span>'
-          : '<span class="badge b-red">⏸ PAUSA</span>'}</span>
+        <div class="bw"><div class="bf" style="width:${Math.max(pct,3)}%;background:${bc}"></div></div>
+        <span class="slot-p">${(s.price*1000).toFixed(2)} €/MWh</span>
+        <span class="slot-s">${s.charging?'<span class="badge bg">⚡ CARGAR</span>':'<span class="badge br">⏸ PAUSA</span>'}</span>
       `;
       sl.appendChild(row);
     });
 
-    // Regla 90% – no más de 1h con batería >90% sin cargar
-    if (batE > 90) {
-      let bat = batE - needed, over90Since = null;
-      const warns = [];
-      for (const s of plan) {
-        if (s.charging) bat = Math.min(100, bat + CR);
-        if (bat > 90 && !s.charging) {
-          if (!over90Since) over90Since = s.hour;
-        } else {
-          if (over90Since) {
-            const h = (s.hour - over90Since) / 3600000;
-            if (h > 1) warns.push(fmt(over90Since) + '–' + fmt(s.hour));
-            over90Since = null;
-          }
-        }
+    if(batE>90){
+      let bat=batE-needed,over90Since=null;
+      const warns=[];
+      for(const s of plan){
+        if(s.charging)bat=Math.min(100,bat+CR);
+        if(bat>90&&!s.charging){if(!over90Since)over90Since=s.hour}
+        else{if(over90Since){const h=(s.hour-over90Since)/3600000;if(h>1)warns.push(fmt(over90Since)+'–'+fmt(s.hour));over90Since=null}}
       }
-      if (warns.length) {
-        document.getElementById('w90').style.display = 'block';
-        document.getElementById('w90t').textContent =
-          'Batería >90% sin carga activa durante más de 1h en los tramos: ' + warns.join(', ') +
-          '. Considera adelantar el inicio de carga.';
-      } else {
-        document.getElementById('w90').style.display = 'none';
-      }
-    } else {
-      document.getElementById('w90').style.display = 'none';
-    }
+      if(warns.length){document.getElementById('w90').style.display='block';document.getElementById('w90t').textContent='Batería >90% sin carga durante más de 1h en: '+warns.join(', ')+'. Considera adelantar el inicio.'}
+      else document.getElementById('w90').style.display='none';
+    }else document.getElementById('w90').style.display='none';
 
-    document.getElementById('res').style.display = 'block';
-
-  } catch (e) {
-    showErr('Error inesperado: ' + e.message);
-  } finally {
+    document.getElementById('res').style.display='block';
+  }catch(e){
+    showErr('Error inesperado: '+e.message+'\n\nAbre la consola (F12) para más detalles.');
+  }finally{
     loading(false);
-    document.getElementById('btn').disabled = false;
+    document.getElementById('btn').disabled=false;
   }
 }
 </script>
