@@ -7,21 +7,10 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --bg:#0e1117;--surface:#161b27;--surface2:#1e2535;
-      --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
-      --text:#e8eaf0;--muted:#7a8499;--hint:#4a5268;
-      --green:#4ade80;--green-bg:rgba(74,222,128,0.1);
-      --red:#f87171;--red-bg:rgba(248,113,113,0.1);
-      --amber:#fbbf24;--amber-bg:rgba(251,191,36,0.1);
-      --blue:#60a5fa;--blue-bg:rgba(96,165,250,0.08);
-      --radius:10px;--radius-sm:6px;
-    }
+    :root{--bg:#0e1117;--surface:#161b27;--surface2:#1e2535;--border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);--text:#e8eaf0;--muted:#7a8499;--hint:#4a5268;--green:#4ade80;--green-bg:rgba(74,222,128,0.1);--red:#f87171;--red-bg:rgba(248,113,113,0.1);--amber:#fbbf24;--amber-bg:rgba(251,191,36,0.1);--blue:#60a5fa;--blue-bg:rgba(96,165,250,0.08);--radius:10px;--radius-sm:6px}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;line-height:1.6;min-height:100vh}
-    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
-      background-image:linear-gradient(rgba(74,222,128,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(74,222,128,0.025) 1px,transparent 1px);
-      background-size:40px 40px}
+    body::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:0;background-image:linear-gradient(rgba(74,222,128,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(74,222,128,0.025) 1px,transparent 1px);background-size:40px 40px}
     .page{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:2.5rem 1.25rem 4rem}
     header{margin-bottom:2.5rem}
     .tag{font-family:'DM Mono',monospace;font-size:11px;color:var(--green);letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem;display:flex;align-items:center;gap:8px}
@@ -40,6 +29,10 @@
     input:focus,select:focus{border-color:var(--green)}
     input[type="date"]::-webkit-calendar-picker-indicator,input[type="time"]::-webkit-calendar-picker-indicator{filter:invert(.4)}
     .info-bar{margin-top:1rem;padding:.6rem .9rem;background:var(--blue-bg);border:1px solid rgba(96,165,250,.15);border-radius:var(--radius-sm);font-size:13px;color:var(--blue);font-family:'DM Mono',monospace}
+    .status-bar{padding:.6rem .9rem;background:var(--surface2);border:1px solid var(--border);border-radius:var(--radius-sm);font-size:12px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:1rem;display:flex;align-items:center;gap:8px}
+    .status-dot{width:7px;height:7px;border-radius:50%;background:var(--hint);flex-shrink:0}
+    .status-dot.ok{background:var(--green);box-shadow:0 0 6px var(--green)}
+    .status-dot.warn{background:var(--amber)}
     button.run{width:100%;background:var(--green);color:#0a0f0a;border:none;border-radius:var(--radius-sm);font-family:'DM Sans',sans-serif;font-size:14px;font-weight:500;padding:.8rem 1.5rem;cursor:pointer;letter-spacing:.02em;transition:opacity .15s,transform .1s;margin:1.25rem 0}
     button.run:hover{opacity:.88}button.run:active{transform:scale(.99)}button.run:disabled{opacity:.35;cursor:not-allowed}
     #ld{display:none;text-align:center;padding:2rem;color:var(--muted);font-family:'DM Mono',monospace;font-size:13px}
@@ -69,8 +62,7 @@
     .br{background:var(--red-bg);color:var(--red);border:1px solid rgba(248,113,113,.2)}
     .warn{background:var(--amber-bg);border:1px solid rgba(251,191,36,.2);border-radius:var(--radius-sm);padding:.8rem 1rem;font-size:13px;color:var(--amber);font-family:'DM Mono',monospace;line-height:1.6;margin-top:1rem}
     footer{margin-top:3rem;text-align:center;font-size:12px;color:var(--hint);font-family:'DM Mono',monospace;line-height:2}
-    footer a{color:var(--muted);text-decoration:none}
-    footer a:hover{color:var(--green)}
+    footer a{color:var(--muted);text-decoration:none}footer a:hover{color:var(--green)}
   </style>
 </head>
 <body>
@@ -80,6 +72,11 @@
     <h1>Optimizador de carga<br><span>PVPC</span> inteligente</h1>
     <p class="sub">Calcula las horas más baratas para cargar tu vehículo · Datos PVPC oficiales España</p>
   </header>
+
+  <div class="status-bar" id="status-bar">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-text">Cargando precios disponibles…</span>
+  </div>
 
   <div class="card">
     <div class="card-title">// Parámetros de carga</div>
@@ -107,7 +104,7 @@
 
   <button class="run" id="btn" onclick="run()">→ Calcular horario óptimo</button>
 
-  <div id="ld"><span class="spin"></span><span id="ldt">Cargando precios…</span></div>
+  <div id="ld"><span class="spin"></span><span id="ldt">Calculando…</span></div>
   <div class="err" id="er"></div>
 
   <div id="res" style="display:none">
@@ -132,20 +129,14 @@
   </div>
 
   <footer>
-    <div>Fuente: <a href="https://api.preciodelaluz.org" target="_blank">api.preciodelaluz.org</a> · Tarifa PVPC 2.0TD · 6%/h · 7,4 kW</div>
-    <div>Los precios del día siguiente se publican a las ~20:30h</div>
+    <div>Fuente: <a href="https://api.preciodelaluz.org" target="_blank">api.preciodelaluz.org</a> · Actualizado automáticamente vía GitHub Actions</div>
+    <div>Tarifa PVPC 2.0TD · 6%/h · 7,4 kW · Precios del día siguiente disponibles ~20:30h</div>
   </footer>
 </div>
 
 <script>
-const CR = 6, KW = 7.4;
-
-// Proxies CORS públicos encadenados — se prueba uno a uno hasta que funcione
-const PROXIES = [
-  u => `https://corsproxy.io/?${encodeURIComponent(u)}`,
-  u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
-  u => `https://thingproxy.freeboard.io/fetch/${u}`,
-];
+const CR=6, KW=7.4;
+let PRICES={};  // { "2026-05-21": { "00-01": {...}, ... }, ... }
 
 function ds(d){return d.toISOString().split('T')[0]}
 function addD(s,n){const d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return ds(d)}
@@ -153,11 +144,6 @@ function fmt(d){return d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-di
 function fmtD(d){return d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
 function showErr(m){const el=document.getElementById('er');el.textContent=m;el.style.display='block';loading(false);document.getElementById('btn').disabled=false}
 function loading(on,msg){document.getElementById('ld').style.display=on?'block':'none';if(msg)document.getElementById('ldt').textContent=msg}
-
-(function init(){
-  document.getElementById('dd').value=addD(ds(new Date()),1);
-  upd();
-})();
 
 function upd(){
   const s=parseInt(document.getElementById('s').value)||0;
@@ -168,42 +154,46 @@ function upd(){
     :'El objetivo debe ser mayor que la batería inicial.';
 }
 
-async function fetchWithProxy(url){
-  const errors=[];
-  for(const proxy of PROXIES){
-    try{
-      const r=await fetch(proxy(url),{signal:AbortSignal.timeout(9000)});
-      if(!r.ok) throw new Error('HTTP '+r.status);
-      const text=await r.text();
-      // allorigins a veces envuelve en {contents: "..."}
-      try{
-        const j=JSON.parse(text);
-        if(j.contents) return JSON.parse(j.contents);
-        return j;
-      }catch(e){ throw new Error('JSON inválido: '+text.substring(0,80)); }
-    }catch(e){ errors.push(e.message); }
+// Carga el JSON estático generado por GitHub Actions
+async function loadPrices(){
+  const dot=document.getElementById('status-dot');
+  const txt=document.getElementById('status-text');
+  try{
+    const r=await fetch(`data/prices.json?t=${Date.now()}`);
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const data=await r.json();
+    PRICES=data.prices||{};
+    const dates=Object.keys(PRICES);
+    const updated=data.updated?new Date(data.updated).toLocaleString('es-ES'):'—';
+    if(dates.length>0){
+      dot.className='status-dot ok';
+      txt.textContent=`Precios disponibles: ${dates.join(', ')} · Actualizado: ${updated}`;
+    }else{
+      dot.className='status-dot warn';
+      txt.textContent='Sin datos aún — ejecuta el workflow manualmente en GitHub Actions';
+    }
+  }catch(e){
+    dot.className='status-dot warn';
+    txt.textContent='data/prices.json no encontrado — ejecuta el workflow en GitHub Actions';
+    console.warn('Error cargando precios:',e);
   }
-  throw new Error('Todos los proxies fallaron.\n'+errors.join('\n'));
 }
 
-async function fetchPVPC(dateStr,zone){
-  const url=`https://api.preciodelaluz.org/v1/prices/all?zone=${zone}&date=${dateStr}`;
-  const data=await fetchWithProxy(url);
-  // La API devuelve objeto con claves tipo "00-01", cada valor tiene: date, price, is-cheap
-  return Object.values(data).map(h=>{
+function getPricesForDate(dateStr){
+  const dayData=PRICES[dateStr];
+  if(!dayData) return [];
+  return Object.values(dayData).map(h=>{
     const hour=new Date(h.date);
-    // price viene en €/MWh → convertir a €/kWh
-    const price=parseFloat(h.price)/1000;
+    const price=parseFloat(h.price)/1000; // €/MWh → €/kWh
     return{hour,price};
   }).filter(v=>!isNaN(v.price)&&!isNaN(v.hour.getTime())&&v.price>0);
 }
 
-async function run(){
+function run(){
   const batS=parseInt(document.getElementById('s').value);
   const batE=parseInt(document.getElementById('e').value);
   const dateStr=document.getElementById('dd').value;
   const timeStr=document.getElementById('dt').value;
-  const zone=document.getElementById('zone').value;
 
   document.getElementById('er').style.display='none';
   document.getElementById('res').style.display='none';
@@ -218,112 +208,97 @@ async function run(){
   const now=new Date();
   if(deadline<=now){showErr('La fecha límite debe ser en el futuro.');return}
 
-  loading(true,'Conectando con API de precios PVPC…');
+  loading(true,'Calculando horario óptimo…');
 
-  try{
-    const dates=new Set();
-    const c=new Date(now);
-    while(c<deadline){dates.add(ds(c));c.setDate(c.getDate()+1)}
-
-    let allSlots=[];
-    let idx=0;
-    for(const d of dates){
-      idx++;
-      loading(true,`Obteniendo precios del ${d} (${idx}/${dates.size})…`);
-      try{
-        const slots=await fetchPVPC(d,zone);
-        allSlots=allSlots.concat(slots);
-      }catch(e){console.warn('Error para',d,':',e.message)}
-    }
-
-    allSlots=allSlots.filter(s=>s.hour>=now&&s.hour<deadline).sort((a,b)=>a.hour-b.hour);
-
-    if(allSlots.length===0){
-      showErr(
-        'No se obtuvieron precios para este periodo.\n\n'+
-        'Causas posibles:\n'+
-        '• Los precios del día siguiente se publican a las ~20:30h\n'+
-        '• Prueba con la fecha de hoy\n'+
-        '• La API puede estar temporalmente caída\n\n'+
-        'Abre la consola del navegador (F12 → Consola) para ver el error exacto.'
-      );
-      return;
-    }
-    if(allSlots.length<horasNec){
-      showErr(`Solo hay ${allSlots.length}h disponibles en la ventana, pero necesitas ${horasNec}h. Amplía el plazo.`);
-      return;
-    }
-
-    const sorted=[...allSlots].sort((a,b)=>a.price-b.price);
-    const cheapSet=new Set(sorted.slice(0,horasNec).map(s=>s.hour.getTime()));
-    const plan=allSlots.map(s=>({...s,charging:cheapSet.has(s.hour.getTime())}));
-
-    const prices=allSlots.map(s=>s.price);
-    const minP=Math.min(...prices),maxP=Math.max(...prices),range=maxP-minP||1;
-    const totalCost=plan.filter(s=>s.charging).reduce((a,s)=>a+s.price*KW,0);
-    const worstCost=sorted.slice(-horasNec).reduce((a,s)=>a+s.price*KW,0);
-
-    document.getElementById('rh').textContent=horasNec+'h';
-    document.getElementById('rc').textContent='€'+totalCost.toFixed(3);
-    document.getElementById('rk').textContent=(needed/CR*KW).toFixed(1)+' kWh aprox.';
-    document.getElementById('ra').textContent='€'+Math.max(0,worstCost-totalCost).toFixed(3);
-
-    const tl=document.getElementById('tl');
-    tl.innerHTML='';
-    plan.forEach(s=>{
-      const seg=document.createElement('div');
-      seg.className='tl-seg';
-      seg.style.background=s.charging?'#4ade80':'#f87171';
-      seg.title=fmt(s.hour)+' · '+(s.charging?'⚡ Cargar':'⏸ Pausa')+' · '+(s.price*1000).toFixed(2)+' €/MWh';
-      tl.appendChild(seg);
-    });
-
-    const sl=document.getElementById('sl');
-    sl.innerHTML='';
-    let lastDay='';
-    plan.forEach(s=>{
-      const day=fmtD(s.hour);
-      if(day!==lastDay){
-        lastDay=day;
-        const dl=document.createElement('div');
-        dl.className='day-label';
-        dl.textContent=day;
-        sl.appendChild(dl);
-      }
-      const pct=Math.round((s.price-minP)/range*100);
-      const bc=pct<33?'#4ade80':pct<66?'#fbbf24':'#f87171';
-      const endH=new Date(s.hour.getTime()+3600000);
-      const row=document.createElement('div');
-      row.className='slot';
-      row.innerHTML=`
-        <span class="slot-t">${fmt(s.hour)}–${fmt(endH)}</span>
-        <div class="bw"><div class="bf" style="width:${Math.max(pct,3)}%;background:${bc}"></div></div>
-        <span class="slot-p">${(s.price*1000).toFixed(2)} €/MWh</span>
-        <span class="slot-s">${s.charging?'<span class="badge bg">⚡ CARGAR</span>':'<span class="badge br">⏸ PAUSA</span>'}</span>
-      `;
-      sl.appendChild(row);
-    });
-
-    if(batE>90){
-      let bat=batE-needed,over90Since=null;
-      const warns=[];
-      for(const s of plan){
-        if(s.charging)bat=Math.min(100,bat+CR);
-        if(bat>90&&!s.charging){if(!over90Since)over90Since=s.hour}
-        else{if(over90Since){const h=(s.hour-over90Since)/3600000;if(h>1)warns.push(fmt(over90Since)+'–'+fmt(s.hour));over90Since=null}}
-      }
-      if(warns.length){document.getElementById('w90').style.display='block';document.getElementById('w90t').textContent='Batería >90% sin carga durante más de 1h en: '+warns.join(', ')+'. Considera adelantar el inicio.'}
-      else document.getElementById('w90').style.display='none';
-    }else document.getElementById('w90').style.display='none';
-
-    document.getElementById('res').style.display='block';
-  }catch(e){
-    showErr('Error inesperado: '+e.message+'\n\nAbre la consola (F12) para más detalles.');
-  }finally{
-    loading(false);
-    document.getElementById('btn').disabled=false;
+  // Recoger slots de los días disponibles
+  let allSlots=[];
+  const c=new Date(now);
+  while(c<deadline){
+    const slots=getPricesForDate(ds(c));
+    allSlots=allSlots.concat(slots);
+    c.setDate(c.getDate()+1);
   }
+
+  allSlots=allSlots.filter(s=>s.hour>=now&&s.hour<deadline).sort((a,b)=>a.hour-b.hour);
+
+  loading(false);
+  document.getElementById('btn').disabled=false;
+
+  if(allSlots.length===0){
+    const available=Object.keys(PRICES);
+    showErr(
+      'No hay precios para este periodo en el archivo local.\n\n'+
+      (available.length>0
+        ? `Fechas disponibles: ${available.join(', ')}\nSelecciona una de esas fechas como límite.`
+        : 'No hay ningún precio cargado todavía.\n\nVe a tu repositorio en GitHub → pestaña "Actions" → workflow "Actualizar precios PVPC" → botón "Run workflow" para obtener los precios ahora mismo.')
+    );
+    return;
+  }
+
+  if(allSlots.length<horasNec){
+    showErr(`Solo hay ${allSlots.length}h disponibles pero necesitas ${horasNec}h. Amplía el plazo o espera a que se publiquen más precios.`);
+    return;
+  }
+
+  const sorted=[...allSlots].sort((a,b)=>a.price-b.price);
+  const cheapSet=new Set(sorted.slice(0,horasNec).map(s=>s.hour.getTime()));
+  const plan=allSlots.map(s=>({...s,charging:cheapSet.has(s.hour.getTime())}));
+
+  const prices=allSlots.map(s=>s.price);
+  const minP=Math.min(...prices),maxP=Math.max(...prices),range=maxP-minP||1;
+  const totalCost=plan.filter(s=>s.charging).reduce((a,s)=>a+s.price*KW,0);
+  const worstCost=sorted.slice(-horasNec).reduce((a,s)=>a+s.price*KW,0);
+
+  document.getElementById('rh').textContent=horasNec+'h';
+  document.getElementById('rc').textContent='€'+totalCost.toFixed(3);
+  document.getElementById('rk').textContent=(needed/CR*KW).toFixed(1)+' kWh aprox.';
+  document.getElementById('ra').textContent='€'+Math.max(0,worstCost-totalCost).toFixed(3);
+
+  const tl=document.getElementById('tl');
+  tl.innerHTML='';
+  plan.forEach(s=>{
+    const seg=document.createElement('div');
+    seg.className='tl-seg';
+    seg.style.background=s.charging?'#4ade80':'#f87171';
+    seg.title=fmt(s.hour)+' · '+(s.charging?'⚡ Cargar':'⏸ Pausa')+' · '+(s.price*1000).toFixed(2)+' €/MWh';
+    tl.appendChild(seg);
+  });
+
+  const sl=document.getElementById('sl');
+  sl.innerHTML='';
+  let lastDay='';
+  plan.forEach(s=>{
+    const day=fmtD(s.hour);
+    if(day!==lastDay){lastDay=day;const dl=document.createElement('div');dl.className='day-label';dl.textContent=day;sl.appendChild(dl)}
+    const pct=Math.round((s.price-minP)/range*100);
+    const bc=pct<33?'#4ade80':pct<66?'#fbbf24':'#f87171';
+    const endH=new Date(s.hour.getTime()+3600000);
+    const row=document.createElement('div');
+    row.className='slot';
+    row.innerHTML=`<span class="slot-t">${fmt(s.hour)}–${fmt(endH)}</span><div class="bw"><div class="bf" style="width:${Math.max(pct,3)}%;background:${bc}"></div></div><span class="slot-p">${(s.price*1000).toFixed(2)} €/MWh</span><span class="slot-s">${s.charging?'<span class="badge bg">⚡ CARGAR</span>':'<span class="badge br">⏸ PAUSA</span>'}</span>`;
+    sl.appendChild(row);
+  });
+
+  if(batE>90){
+    let bat=batE-needed,over90Since=null;const warns=[];
+    for(const s of plan){
+      if(s.charging)bat=Math.min(100,bat+CR);
+      if(bat>90&&!s.charging){if(!over90Since)over90Since=s.hour}
+      else{if(over90Since){const h=(s.hour-over90Since)/3600000;if(h>1)warns.push(fmt(over90Since)+'–'+fmt(s.hour));over90Since=null}}
+    }
+    if(warns.length){document.getElementById('w90').style.display='block';document.getElementById('w90t').textContent='Batería >90% sin carga durante más de 1h en: '+warns.join(', ');}
+    else document.getElementById('w90').style.display='none';
+  }else document.getElementById('w90').style.display='none';
+
+  document.getElementById('res').style.display='block';
 }
+
+// Al cargar la página: inicializar fecha y precios
+(function init(){
+  document.getElementById('dd').value=addD(ds(new Date()),1);
+  upd();
+  loadPrices();
+})();
 </script>
 </body>
 </html>
