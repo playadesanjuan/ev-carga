@@ -129,37 +129,41 @@
   </div>
 
   <footer>
-    <div>Fuente: <a href="https://api.preciodelaluz.org" target="_blank">api.preciodelaluz.org</a> · Actualizado automáticamente vía GitHub Actions</div>
+    <div>Fuente: <a href="https://apidatos.ree.es" target="_blank">Red Eléctrica de España</a> · Actualizado automáticamente cada noche</div>
     <div>Tarifa PVPC 2.0TD · 6%/h · 7,4 kW · Precios del día siguiente disponibles ~20:30h</div>
   </footer>
 </div>
 
 <script>
 const CR=6, KW=7.4;
-let PRICES={};  // { "2026-05-21": { "00-01": {...}, ... }, ... }
+let PRICES={};
 
 function ds(d){return d.toISOString().split('T')[0]}
 function addD(s,n){const d=new Date(s+'T12:00:00');d.setDate(d.getDate()+n);return ds(d)}
 function fmt(d){return d.toLocaleTimeString('es-ES',{hour:'2-digit',minute:'2-digit'})}
 function fmtD(d){return d.toLocaleDateString('es-ES',{weekday:'long',day:'numeric',month:'long'})}
-function showErr(m){const el=document.getElementById('er');el.textContent=m;el.style.display='block';loading(false);document.getElementById('btn').disabled=false}
-function loading(on,msg){document.getElementById('ld').style.display=on?'block':'none';if(msg)document.getElementById('ldt').textContent=msg}
+function showErr(m){const el=document.getElementById('er');el.textContent=m;el.style.display='block';document.getElementById('btn').disabled=false}
+
+(function init(){
+  document.getElementById('dd').value=addD(ds(new Date()),1);
+  upd();
+  loadPrices();
+})();
 
 function upd(){
   const s=parseInt(document.getElementById('s').value)||0;
   const e=parseInt(document.getElementById('e').value)||0;
   const n=Math.max(0,e-s),h=Math.ceil(n/CR);
   document.getElementById('inf').textContent=n>0
-    ?`Necesitas cargar ${n}% → ${h}h de carga → aprox. ${(n/CR*KW).toFixed(1)} kWh`
+    ?'Necesitas cargar '+n+'% → '+h+'h de carga → aprox. '+(n/CR*KW).toFixed(1)+' kWh'
     :'El objetivo debe ser mayor que la batería inicial.';
 }
 
-// Carga el JSON estático generado por GitHub Actions
 async function loadPrices(){
   const dot=document.getElementById('status-dot');
   const txt=document.getElementById('status-text');
   try{
-    const r=await fetch(`data/prices.json?t=${Date.now()}`);
+    const r=await fetch('data/prices.json?t='+Date.now());
     if(!r.ok) throw new Error('HTTP '+r.status);
     const data=await r.json();
     PRICES=data.prices||{};
@@ -167,26 +171,29 @@ async function loadPrices(){
     const updated=data.updated?new Date(data.updated).toLocaleString('es-ES'):'—';
     if(dates.length>0){
       dot.className='status-dot ok';
-      txt.textContent=`Precios disponibles: ${dates.join(', ')} · Actualizado: ${updated}`;
+      txt.textContent='Precios disponibles: '+dates.join(', ')+' · Actualizado: '+updated;
     }else{
       dot.className='status-dot warn';
-      txt.textContent='Sin datos aún — ejecuta el workflow manualmente en GitHub Actions';
+      txt.textContent='Sin datos — ejecuta el script fetch_prices.py';
     }
   }catch(e){
-    dot.className='status-dot warn';
-    txt.textContent='data/prices.json no encontrado — ejecuta el workflow en GitHub Actions';
-    console.warn('Error cargando precios:',e);
+    document.getElementById('status-dot').className='status-dot warn';
+    document.getElementById('status-text').textContent='No se pudo cargar prices.json: '+e.message;
   }
 }
 
-function getPricesForDate(dateStr){
-  const dayData=PRICES[dateStr];
-  if(!dayData) return [];
-  return Object.values(dayData).map(h=>{
-    const hour=new Date(h.date);
-    const price=parseFloat(h.price)/1000; // €/MWh → €/kWh
-    return{hour,price};
-  }).filter(v=>!isNaN(v.price)&&!isNaN(v.hour.getTime())&&v.price>0);
+function getSlotsFromPrices(now, deadline){
+  let allSlots=[];
+  for(const [fecha, horas] of Object.entries(PRICES)){
+    for(const h of Object.values(horas)){
+      const hora=new Date(h.date);
+      if(isNaN(hora.getTime())) continue;
+      if(hora>=now && hora<deadline){
+        allSlots.push({hour:hora, price:h.price});
+      }
+    }
+  }
+  return allSlots.sort((a,b)=>a.hour-b.hour);
 }
 
 function run(){
@@ -206,37 +213,24 @@ function run(){
   const horasNec=Math.ceil(needed/CR);
   const deadline=new Date(dateStr+'T'+timeStr+':00');
   const now=new Date();
+
   if(deadline<=now){showErr('La fecha límite debe ser en el futuro.');return}
 
-  loading(true,'Calculando horario óptimo…');
+  const allSlots=getSlotsFromPrices(now, deadline);
 
-  // Recoger slots de los días disponibles
-  let allSlots=[];
-  const c=new Date(now);
-  while(c<deadline){
-    const slots=getPricesForDate(ds(c));
-    allSlots=allSlots.concat(slots);
-    c.setDate(c.getDate()+1);
-  }
-
-  allSlots=allSlots.filter(s=>s.hour>=now&&s.hour<deadline).sort((a,b)=>a.hour-b.hour);
-
-  loading(false);
   document.getElementById('btn').disabled=false;
 
   if(allSlots.length===0){
     const available=Object.keys(PRICES);
-    showErr(
-      'No hay precios para este periodo en el archivo local.\n\n'+
+    showErr('No hay precios para este periodo en el archivo local.\n\n'+
       (available.length>0
-        ? `Fechas disponibles: ${available.join(', ')}\nSelecciona una de esas fechas como límite.`
-        : 'No hay ningún precio cargado todavía.\n\nVe a tu repositorio en GitHub → pestaña "Actions" → workflow "Actualizar precios PVPC" → botón "Run workflow" para obtener los precios ahora mismo.')
-    );
+        ?'Fechas disponibles: '+available.join(', ')+'\nSelecciona una de esas fechas como límite.'
+        :'No hay ningún precio cargado todavía.\nEjecuta: python3 fetch_prices.py'));
     return;
   }
 
   if(allSlots.length<horasNec){
-    showErr(`Solo hay ${allSlots.length}h disponibles pero necesitas ${horasNec}h. Amplía el plazo o espera a que se publiquen más precios.`);
+    showErr('Solo hay '+allSlots.length+'h disponibles pero necesitas '+horasNec+'h. Amplía el plazo.');
     return;
   }
 
@@ -246,8 +240,9 @@ function run(){
 
   const prices=allSlots.map(s=>s.price);
   const minP=Math.min(...prices),maxP=Math.max(...prices),range=maxP-minP||1;
-  const totalCost=plan.filter(s=>s.charging).reduce((a,s)=>a+s.price*KW,0);
-  const worstCost=sorted.slice(-horasNec).reduce((a,s)=>a+s.price*KW,0);
+  // precio en €/MWh → multiplicar por KW y dividir entre 1000 para obtener €
+  const totalCost=plan.filter(s=>s.charging).reduce((a,s)=>a+s.price*KW/1000,0);
+  const worstCost=sorted.slice(-horasNec).reduce((a,s)=>a+s.price*KW/1000,0);
 
   document.getElementById('rh').textContent=horasNec+'h';
   document.getElementById('rc').textContent='€'+totalCost.toFixed(3);
@@ -260,7 +255,7 @@ function run(){
     const seg=document.createElement('div');
     seg.className='tl-seg';
     seg.style.background=s.charging?'#4ade80':'#f87171';
-    seg.title=fmt(s.hour)+' · '+(s.charging?'⚡ Cargar':'⏸ Pausa')+' · '+(s.price*1000).toFixed(2)+' €/MWh';
+    seg.title=fmt(s.hour)+' · '+(s.charging?'⚡ Cargar':'⏸ Pausa')+' · '+s.price.toFixed(2)+' €/MWh';
     tl.appendChild(seg);
   });
 
@@ -269,13 +264,22 @@ function run(){
   let lastDay='';
   plan.forEach(s=>{
     const day=fmtD(s.hour);
-    if(day!==lastDay){lastDay=day;const dl=document.createElement('div');dl.className='day-label';dl.textContent=day;sl.appendChild(dl)}
+    if(day!==lastDay){
+      lastDay=day;
+      const dl=document.createElement('div');
+      dl.className='day-label';
+      dl.textContent=day;
+      sl.appendChild(dl);
+    }
     const pct=Math.round((s.price-minP)/range*100);
     const bc=pct<33?'#4ade80':pct<66?'#fbbf24':'#f87171';
     const endH=new Date(s.hour.getTime()+3600000);
     const row=document.createElement('div');
     row.className='slot';
-    row.innerHTML=`<span class="slot-t">${fmt(s.hour)}–${fmt(endH)}</span><div class="bw"><div class="bf" style="width:${Math.max(pct,3)}%;background:${bc}"></div></div><span class="slot-p">${(s.price*1000).toFixed(2)} €/MWh</span><span class="slot-s">${s.charging?'<span class="badge bg">⚡ CARGAR</span>':'<span class="badge br">⏸ PAUSA</span>'}</span>`;
+    row.innerHTML='<span class="slot-t">'+fmt(s.hour)+'–'+fmt(endH)+'</span>'
+      +'<div class="bw"><div class="bf" style="width:'+Math.max(pct,3)+'%;background:'+bc+'"></div></div>'
+      +'<span class="slot-p">'+s.price.toFixed(2)+' €/MWh</span>'
+      +'<span class="slot-s">'+(s.charging?'<span class="badge bg">⚡ CARGAR</span>':'<span class="badge br">⏸ PAUSA</span>')+'</span>';
     sl.appendChild(row);
   });
 
@@ -292,13 +296,6 @@ function run(){
 
   document.getElementById('res').style.display='block';
 }
-
-// Al cargar la página: inicializar fecha y precios
-(function init(){
-  document.getElementById('dd').value=addD(ds(new Date()),1);
-  upd();
-  loadPrices();
-})();
 </script>
 </body>
 </html>
