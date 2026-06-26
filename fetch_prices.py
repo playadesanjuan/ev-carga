@@ -6,7 +6,7 @@ import subprocess
 from datetime import datetime, timedelta
 from collections import defaultdict
 
-RUTA_REPO = "/home/ricardo/ev-carga"
+RUTA_REPO = os.path.dirname(os.path.abspath(__file__))
 
 def obtener_precios(fecha_str):
     start = fecha_str + "T00:00"
