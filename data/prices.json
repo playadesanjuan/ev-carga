@@ -1,294 +1,294 @@
 {
-  "updated": "2026-09-08T21:57:59.432444",
+  "updated": "2026-09-09T21:50:38.783557",
   "prices": {
-    "2026-09-08": {
+    "2026-09-09": {
       "00-00": {
-        "date": "2026-09-08T00:00:00+02:00",
-        "price": 232.13,
+        "date": "2026-09-09T00:00:00+02:00",
+        "price": 207.07,
         "is-cheap": false,
         "source": "PVPC"
       },
       "01-01": {
-        "date": "2026-09-08T01:00:00+02:00",
-        "price": 209.93,
+        "date": "2026-09-09T01:00:00+02:00",
+        "price": 186.22,
         "is-cheap": false,
         "source": "PVPC"
       },
       "02-02": {
-        "date": "2026-09-08T02:00:00+02:00",
-        "price": 212.72,
+        "date": "2026-09-09T02:00:00+02:00",
+        "price": 174.9,
         "is-cheap": false,
         "source": "PVPC"
       },
       "03-03": {
-        "date": "2026-09-08T03:00:00+02:00",
-        "price": 211.45,
+        "date": "2026-09-09T03:00:00+02:00",
+        "price": 171.08,
         "is-cheap": false,
         "source": "PVPC"
       },
       "04-04": {
-        "date": "2026-09-08T04:00:00+02:00",
-        "price": 207.56,
+        "date": "2026-09-09T04:00:00+02:00",
+        "price": 169.62,
         "is-cheap": false,
         "source": "PVPC"
       },
       "05-05": {
-        "date": "2026-09-08T05:00:00+02:00",
-        "price": 205.9,
+        "date": "2026-09-09T05:00:00+02:00",
+        "price": 173.89,
         "is-cheap": false,
         "source": "PVPC"
       },
       "06-06": {
-        "date": "2026-09-08T06:00:00+02:00",
-        "price": 223.74,
+        "date": "2026-09-09T06:00:00+02:00",
+        "price": 209.61,
         "is-cheap": false,
         "source": "PVPC"
       },
       "07-07": {
-        "date": "2026-09-08T07:00:00+02:00",
-        "price": 244.21,
+        "date": "2026-09-09T07:00:00+02:00",
+        "price": 247.56,
         "is-cheap": false,
         "source": "PVPC"
       },
       "08-08": {
-        "date": "2026-09-08T08:00:00+02:00",
-        "price": 258.72,
+        "date": "2026-09-09T08:00:00+02:00",
+        "price": 262.89,
         "is-cheap": false,
         "source": "PVPC"
       },
       "09-09": {
-        "date": "2026-09-08T09:00:00+02:00",
-        "price": 200.36,
+        "date": "2026-09-09T09:00:00+02:00",
+        "price": 194.0,
         "is-cheap": false,
         "source": "PVPC"
       },
       "10-10": {
-        "date": "2026-09-08T10:00:00+02:00",
-        "price": 214.62,
+        "date": "2026-09-09T10:00:00+02:00",
+        "price": 140.23,
         "is-cheap": false,
         "source": "PVPC"
       },
       "11-11": {
-        "date": "2026-09-08T11:00:00+02:00",
-        "price": 175.23,
+        "date": "2026-09-09T11:00:00+02:00",
+        "price": 110.19,
         "is-cheap": false,
         "source": "PVPC"
       },
       "12-12": {
-        "date": "2026-09-08T12:00:00+02:00",
-        "price": 151.85,
+        "date": "2026-09-09T12:00:00+02:00",
+        "price": 110.39,
         "is-cheap": false,
         "source": "PVPC"
       },
       "13-13": {
-        "date": "2026-09-08T13:00:00+02:00",
-        "price": 126.12,
+        "date": "2026-09-09T13:00:00+02:00",
+        "price": 109.73,
         "is-cheap": false,
         "source": "PVPC"
       },
       "14-14": {
-        "date": "2026-09-08T14:00:00+02:00",
-        "price": 76.72,
+        "date": "2026-09-09T14:00:00+02:00",
+        "price": 40.69,
         "is-cheap": true,
         "source": "PVPC"
       },
       "15-15": {
-        "date": "2026-09-08T15:00:00+02:00",
-        "price": 63.33,
+        "date": "2026-09-09T15:00:00+02:00",
+        "price": 41.17,
         "is-cheap": true,
         "source": "PVPC"
       },
       "16-16": {
-        "date": "2026-09-08T16:00:00+02:00",
-        "price": 72.97,
+        "date": "2026-09-09T16:00:00+02:00",
+        "price": 41.27,
         "is-cheap": true,
         "source": "PVPC"
       },
       "17-17": {
-        "date": "2026-09-08T17:00:00+02:00",
-        "price": 121.94,
-        "is-cheap": false,
+        "date": "2026-09-09T17:00:00+02:00",
+        "price": 43.16,
+        "is-cheap": true,
         "source": "PVPC"
       },
       "18-18": {
-        "date": "2026-09-08T18:00:00+02:00",
-        "price": 230.16,
+        "date": "2026-09-09T18:00:00+02:00",
+        "price": 154.31,
         "is-cheap": false,
         "source": "PVPC"
       },
       "19-19": {
-        "date": "2026-09-08T19:00:00+02:00",
-        "price": 305.3,
+        "date": "2026-09-09T19:00:00+02:00",
+        "price": 281.48,
         "is-cheap": false,
         "source": "PVPC"
       },
       "20-20": {
-        "date": "2026-09-08T20:00:00+02:00",
-        "price": 334.82,
+        "date": "2026-09-09T20:00:00+02:00",
+        "price": 349.64,
         "is-cheap": false,
         "source": "PVPC"
       },
       "21-21": {
-        "date": "2026-09-08T21:00:00+02:00",
-        "price": 343.78,
+        "date": "2026-09-09T21:00:00+02:00",
+        "price": 346.56,
         "is-cheap": false,
         "source": "PVPC"
       },
       "22-22": {
-        "date": "2026-09-08T22:00:00+02:00",
-        "price": 250.3,
+        "date": "2026-09-09T22:00:00+02:00",
+        "price": 264.57,
         "is-cheap": false,
         "source": "PVPC"
       },
       "23-23": {
-        "date": "2026-09-08T23:00:00+02:00",
-        "price": 223.82,
+        "date": "2026-09-09T23:00:00+02:00",
+        "price": 249.48,
         "is-cheap": false,
         "source": "PVPC"
       }
     },
-    "2026-09-09": {
+    "2026-09-10": {
       "00-00": {
-        "date": "2026-09-09T00:00:00+02:00",
-        "price": 177.84,
+        "date": "2026-09-10T00:00:00+02:00",
+        "price": 183.825,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "01-01": {
-        "date": "2026-09-09T01:00:00+02:00",
-        "price": 157.25,
+        "date": "2026-09-10T01:00:00+02:00",
+        "price": 181.6875,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "02-02": {
-        "date": "2026-09-09T02:00:00+02:00",
-        "price": 145.3775,
+        "date": "2026-09-10T02:00:00+02:00",
+        "price": 182.6875,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "03-03": {
-        "date": "2026-09-09T03:00:00+02:00",
-        "price": 141.625,
+        "date": "2026-09-10T03:00:00+02:00",
+        "price": 183.4375,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "04-04": {
-        "date": "2026-09-09T04:00:00+02:00",
-        "price": 139.3025,
+        "date": "2026-09-10T04:00:00+02:00",
+        "price": 183.375,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "05-05": {
-        "date": "2026-09-09T05:00:00+02:00",
-        "price": 143.63,
+        "date": "2026-09-10T05:00:00+02:00",
+        "price": 190.02,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "06-06": {
-        "date": "2026-09-09T06:00:00+02:00",
-        "price": 172.185,
+        "date": "2026-09-10T06:00:00+02:00",
+        "price": 212.2,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "07-07": {
-        "date": "2026-09-09T07:00:00+02:00",
-        "price": 192.44,
+        "date": "2026-09-10T07:00:00+02:00",
+        "price": 232.1325,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "08-08": {
-        "date": "2026-09-09T08:00:00+02:00",
-        "price": 181.6775,
+        "date": "2026-09-10T08:00:00+02:00",
+        "price": 222.045,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "09-09": {
-        "date": "2026-09-09T09:00:00+02:00",
-        "price": 134.425,
+        "date": "2026-09-10T09:00:00+02:00",
+        "price": 170.29,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "10-10": {
-        "date": "2026-09-09T10:00:00+02:00",
-        "price": 32.0325,
+        "date": "2026-09-10T10:00:00+02:00",
+        "price": 83.415,
         "is-cheap": true,
         "source": "Precio mercado spot"
       },
       "11-11": {
-        "date": "2026-09-09T11:00:00+02:00",
-        "price": 0.3225,
+        "date": "2026-09-10T11:00:00+02:00",
+        "price": 14.9,
         "is-cheap": true,
         "source": "Precio mercado spot"
       },
       "12-12": {
-        "date": "2026-09-09T12:00:00+02:00",
-        "price": 1.0,
+        "date": "2026-09-10T12:00:00+02:00",
+        "price": 7.255,
         "is-cheap": true,
         "source": "Precio mercado spot"
       },
       "13-13": {
-        "date": "2026-09-09T13:00:00+02:00",
-        "price": 1.0,
+        "date": "2026-09-10T13:00:00+02:00",
+        "price": 10.5225,
         "is-cheap": true,
         "source": "Precio mercado spot"
       },
       "14-14": {
-        "date": "2026-09-09T14:00:00+02:00",
-        "price": 1.0,
+        "date": "2026-09-10T14:00:00+02:00",
+        "price": 12.115,
         "is-cheap": true,
         "source": "Precio mercado spot"
       },
       "15-15": {
-        "date": "2026-09-09T15:00:00+02:00",
-        "price": 1.0,
+        "date": "2026-09-10T15:00:00+02:00",
+        "price": 11.57,
         "is-cheap": true,
         "source": "Precio mercado spot"
       },
       "16-16": {
-        "date": "2026-09-09T16:00:00+02:00",
-        "price": 1.04,
+        "date": "2026-09-10T16:00:00+02:00",
+        "price": 17.2675,
         "is-cheap": true,
         "source": "Precio mercado spot"
       },
       "17-17": {
-        "date": "2026-09-09T17:00:00+02:00",
-        "price": 3.0525,
+        "date": "2026-09-10T17:00:00+02:00",
+        "price": 69.45,
         "is-cheap": true,
         "source": "Precio mercado spot"
       },
       "18-18": {
-        "date": "2026-09-09T18:00:00+02:00",
-        "price": 40.0775,
-        "is-cheap": true,
+        "date": "2026-09-10T18:00:00+02:00",
+        "price": 137.025,
+        "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "19-19": {
-        "date": "2026-09-09T19:00:00+02:00",
-        "price": 150.0775,
+        "date": "2026-09-10T19:00:00+02:00",
+        "price": 222.8925,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "20-20": {
-        "date": "2026-09-09T20:00:00+02:00",
-        "price": 205.515,
+        "date": "2026-09-10T20:00:00+02:00",
+        "price": 271.53,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "21-21": {
-        "date": "2026-09-09T21:00:00+02:00",
-        "price": 201.17,
+        "date": "2026-09-10T21:00:00+02:00",
+        "price": 254.7225,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "22-22": {
-        "date": "2026-09-09T22:00:00+02:00",
-        "price": 187.9925,
+        "date": "2026-09-10T22:00:00+02:00",
+        "price": 225.285,
         "is-cheap": false,
         "source": "Precio mercado spot"
       },
       "23-23": {
-        "date": "2026-09-09T23:00:00+02:00",
-        "price": 175.1,
+        "date": "2026-09-10T23:00:00+02:00",
+        "price": 205.4875,
         "is-cheap": false,
         "source": "Precio mercado spot"
       }
