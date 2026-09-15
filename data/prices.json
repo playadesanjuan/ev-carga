@@ -1,152 +1,6 @@
 {
-  "updated": "2026-09-14T22:38:56.453773",
+  "updated": "2026-09-15T22:23:46.426053",
   "prices": {
-    "2026-09-14": {
-      "00-00": {
-        "date": "2026-09-14T00:00:00+02:00",
-        "price": 199.08,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "01-01": {
-        "date": "2026-09-14T01:00:00+02:00",
-        "price": 191.67,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "02-02": {
-        "date": "2026-09-14T02:00:00+02:00",
-        "price": 185.39,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "03-03": {
-        "date": "2026-09-14T03:00:00+02:00",
-        "price": 182.45,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "04-04": {
-        "date": "2026-09-14T04:00:00+02:00",
-        "price": 185.0,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "05-05": {
-        "date": "2026-09-14T05:00:00+02:00",
-        "price": 195.27,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "06-06": {
-        "date": "2026-09-14T06:00:00+02:00",
-        "price": 232.46,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "07-07": {
-        "date": "2026-09-14T07:00:00+02:00",
-        "price": 305.11,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "08-08": {
-        "date": "2026-09-14T08:00:00+02:00",
-        "price": 331.86,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "09-09": {
-        "date": "2026-09-14T09:00:00+02:00",
-        "price": 226.05,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "10-10": {
-        "date": "2026-09-14T10:00:00+02:00",
-        "price": 205.38,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "11-11": {
-        "date": "2026-09-14T11:00:00+02:00",
-        "price": 136.61,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "12-12": {
-        "date": "2026-09-14T12:00:00+02:00",
-        "price": 121.02,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "13-13": {
-        "date": "2026-09-14T13:00:00+02:00",
-        "price": 126.33,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "14-14": {
-        "date": "2026-09-14T14:00:00+02:00",
-        "price": 57.98,
-        "is-cheap": true,
-        "source": "PVPC"
-      },
-      "15-15": {
-        "date": "2026-09-14T15:00:00+02:00",
-        "price": 73.54,
-        "is-cheap": true,
-        "source": "PVPC"
-      },
-      "16-16": {
-        "date": "2026-09-14T16:00:00+02:00",
-        "price": 92.85,
-        "is-cheap": true,
-        "source": "PVPC"
-      },
-      "17-17": {
-        "date": "2026-09-14T17:00:00+02:00",
-        "price": 127.72,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "18-18": {
-        "date": "2026-09-14T18:00:00+02:00",
-        "price": 265.9,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "19-19": {
-        "date": "2026-09-14T19:00:00+02:00",
-        "price": 352.54,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "20-20": {
-        "date": "2026-09-14T20:00:00+02:00",
-        "price": 431.34,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "21-21": {
-        "date": "2026-09-14T21:00:00+02:00",
-        "price": 413.25,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "22-22": {
-        "date": "2026-09-14T22:00:00+02:00",
-        "price": 315.27,
-        "is-cheap": false,
-        "source": "PVPC"
-      },
-      "23-23": {
-        "date": "2026-09-14T23:00:00+02:00",
-        "price": 261.15,
-        "is-cheap": false,
-        "source": "PVPC"
-      }
-    },
     "2026-09-15": {
       "00-00": {
         "date": "2026-09-15T00:00:00+02:00",
@@ -289,6 +143,152 @@
       "23-23": {
         "date": "2026-09-15T23:00:00+02:00",
         "price": 209.04,
+        "is-cheap": false,
+        "source": "PVPC"
+      }
+    },
+    "2026-09-16": {
+      "00-00": {
+        "date": "2026-09-16T00:00:00+02:00",
+        "price": 206.56,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "01-01": {
+        "date": "2026-09-16T01:00:00+02:00",
+        "price": 202.88,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "02-02": {
+        "date": "2026-09-16T02:00:00+02:00",
+        "price": 200.46,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "03-03": {
+        "date": "2026-09-16T03:00:00+02:00",
+        "price": 197.16,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "04-04": {
+        "date": "2026-09-16T04:00:00+02:00",
+        "price": 195.33,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "05-05": {
+        "date": "2026-09-16T05:00:00+02:00",
+        "price": 202.88,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "06-06": {
+        "date": "2026-09-16T06:00:00+02:00",
+        "price": 210.57,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "07-07": {
+        "date": "2026-09-16T07:00:00+02:00",
+        "price": 243.82,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "08-08": {
+        "date": "2026-09-16T08:00:00+02:00",
+        "price": 245.26,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "09-09": {
+        "date": "2026-09-16T09:00:00+02:00",
+        "price": 139.19,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "10-10": {
+        "date": "2026-09-16T10:00:00+02:00",
+        "price": 122.65,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "11-11": {
+        "date": "2026-09-16T11:00:00+02:00",
+        "price": 117.73,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "12-12": {
+        "date": "2026-09-16T12:00:00+02:00",
+        "price": 116.06,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "13-13": {
+        "date": "2026-09-16T13:00:00+02:00",
+        "price": 115.54,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "14-14": {
+        "date": "2026-09-16T14:00:00+02:00",
+        "price": 46.81,
+        "is-cheap": true,
+        "source": "PVPC"
+      },
+      "15-15": {
+        "date": "2026-09-16T15:00:00+02:00",
+        "price": 46.99,
+        "is-cheap": true,
+        "source": "PVPC"
+      },
+      "16-16": {
+        "date": "2026-09-16T16:00:00+02:00",
+        "price": 47.43,
+        "is-cheap": true,
+        "source": "PVPC"
+      },
+      "17-17": {
+        "date": "2026-09-16T17:00:00+02:00",
+        "price": 50.57,
+        "is-cheap": true,
+        "source": "PVPC"
+      },
+      "18-18": {
+        "date": "2026-09-16T18:00:00+02:00",
+        "price": 151.67,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "19-19": {
+        "date": "2026-09-16T19:00:00+02:00",
+        "price": 264.65,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "20-20": {
+        "date": "2026-09-16T20:00:00+02:00",
+        "price": 337.44,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "21-21": {
+        "date": "2026-09-16T21:00:00+02:00",
+        "price": 339.04,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "22-22": {
+        "date": "2026-09-16T22:00:00+02:00",
+        "price": 236.03,
+        "is-cheap": false,
+        "source": "PVPC"
+      },
+      "23-23": {
+        "date": "2026-09-16T23:00:00+02:00",
+        "price": 211.82,
         "is-cheap": false,
         "source": "PVPC"
       }
